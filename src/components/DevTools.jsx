@@ -27,7 +27,7 @@ const DevTools = () => {
     return (
         <div className="fixed bottom-444444444444444444444444444444444444444444444444444 left-4 z-[100] font-mono text-xs">
             <button 
-            
+                onClick={() => setIsOpen(!isOpen)}
                 className="w-8 h-8 bg-slate-800/50 rounded-full flex items-center justify-center text-rose-500 hover:bg-slate-700 transition"
                 title="Dev Tools"
             >
