@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useKeepsakes } from '../../utils/KeepsakeContext';
 import config from '../../config';
 
@@ -18,18 +18,32 @@ const ChocolateDay = () => {
         { id: 'onion', icon: '🧅', label: 'Onion', bad: true },
     ];
 
+    // Helper to add item (used by both Drag and Click)
+    const addItemToBowl = (item) => {
+        if (!baked) { // Prevent adding if already baked
+            setIngredients(prev => [...prev, item]);
+        }
+    };
+
+    // 1. DESKTOP: Handle Drop
     const handleDrop = (e) => {
         e.preventDefault();
         const itemId = e.dataTransfer.getData("itemId");
         const item = ITEMS.find(i => i.id === itemId);
         
         if (item) {
-            setIngredients(prev => [...prev, item]);
+            addItemToBowl(item);
         }
     };
 
+    // 2. DESKTOP: Handle Drag Start
     const handleDragStart = (e, id) => {
         e.dataTransfer.setData("itemId", id);
+    };
+
+    // 3. MOBILE: Handle Tap/Click
+    const handleItemClick = (item) => {
+        addItemToBowl(item);
     };
 
     const handleBake = () => {
@@ -51,9 +65,11 @@ const ChocolateDay = () => {
     return (
         <div className="flex flex-col items-center w-full max-w-lg gap-6">
             <audio src={config.music.chocolate} autoPlay loop hidden />
+            
             <div className="p-4 bg-[#26233a] border-4 border-[#d97706] text-center shadow-[4px_4px_0_rgba(0,0,0,0.5)]">
                 <h2 className="text-[#d97706] text-lg mb-2">{config.person.name.toUpperCase()}'S PATISSERIE</h2>
-                <p className="text-[10px] text-[#908caa]">Drag sweet ingredients into the bowl!</p>
+                {/* Updated instructions to mention Tapping */}
+                <p className="text-[10px] text-[#908caa]">Drag or Tap ingredients to add them!</p>
             </div>
 
             <div className="flex gap-8 items-end">
@@ -61,35 +77,50 @@ const ChocolateDay = () => {
                 <div 
                     onDragOver={(e) => e.preventDefault()}
                     onDrop={handleDrop}
-                    className="w-40 h-32 bg-[#e0def4] border-4 border-[#908caa] rounded-b-full flex items-center justify-center flex-col relative"
+                    className="w-40 h-32 bg-[#e0def4] border-4 border-[#908caa] rounded-b-full flex items-center justify-center flex-col relative overflow-hidden"
                 >
                     <div className="text-[10px] text-[#908caa] absolute top-2">MIXING BOWL</div>
-                    <div className="flex flex-wrap gap-1 justify-center max-w-[80%]">
-                        {ingredients.map((ing, i) => (
-                            <span key={i} className="text-lg">{ing.icon}</span>
-                        ))}
+                    
+                    {/* Ingredients inside bowl */}
+                    <div className="flex flex-wrap gap-1 justify-center max-w-[80%] max-h-[70%] overflow-y-auto">
+                        <AnimatePresence>
+                            {ingredients.map((ing, i) => (
+                                <motion.span 
+                                    key={i} 
+                                    initial={{ scale: 0, y: -20 }}
+                                    animate={{ scale: 1, y: 0 }}
+                                    className="text-lg"
+                                >
+                                    {ing.icon}
+                                </motion.span>
+                            ))}
+                        </AnimatePresence>
                     </div>
                 </div>
 
-                <button 
+                <motion.button 
+                    whileTap={{ scale: 0.9 }}
                     onClick={handleBake}
                     className="bg-[#d97706] text-white px-4 py-2 border-b-4 border-[#92400e] active:border-b-0 active:translate-y-1 font-bold h-12"
                 >
                     BAKE!
-                </button>
+                </motion.button>
             </div>
 
             {/* Ingredient Shelf */}
             <div className="grid grid-cols-3 md:grid-cols-6 gap-4 bg-[#1f1d2e] p-4 rounded border-2 border-[#6e6a86]">
                 {ITEMS.map(item => (
-                    <div 
+                    <motion.div 
                         key={item.id}
                         draggable
                         onDragStart={(e) => handleDragStart(e, item.id)}
-                        className="w-12 h-12 bg-[#26233a] border-2 border-[#eb6f92] flex items-center justify-center text-2xl cursor-grab hover:bg-[#eb6f92] hover:text-[#191724] transition-colors"
+                        onClick={() => handleItemClick(item)} // Enables Mobile Tap
+                        whileTap={{ scale: 0.8 }} // Visual feedback for tap
+                        whileHover={{ scale: 1.1 }}
+                        className="w-12 h-12 bg-[#26233a] border-2 border-[#eb6f92] flex items-center justify-center text-2xl cursor-pointer select-none hover:bg-[#eb6f92] hover:text-[#191724] transition-colors rounded-lg"
                     >
                         {item.icon}
-                    </div>
+                    </motion.div>
                 ))}
             </div>
 
@@ -100,7 +131,7 @@ const ChocolateDay = () => {
                     animate={{ scale: 1, rotate: 0 }}
                     className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center"
                  >
-                     <div className="bg-[#191724] border-4 border-[#d97706] p-8 text-center max-w-sm">
+                     <div className="bg-[#191724] border-4 border-[#d97706] p-8 text-center max-w-sm mx-4">
                          <div className="text-6xl mb-4">🎂</div>
                          <h3 className="text-[#d97706] text-xl mb-4">PERFECTLY BAKED!</h3>
                          <div className="animate-bounce text-4xl mb-4">🗝️</div>
