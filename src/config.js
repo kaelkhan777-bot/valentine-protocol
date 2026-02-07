@@ -32,14 +32,14 @@ const config = {
     // 💌 Custom Messages
     messages: {
         rose: {
-            title: "My Digital Garden",
+            title: "Our Digital Garden",
             success: "You make my world bloom!"
         },
         propose: {
             success: "YOU SAID YES YPAAAAAAA!"
         },
         chocolate: {
-            success: "Sweetest creation ever!"
+            success: "oroooo Sweetest creation ever!"
         },
         teddy: {
             title: "TEDDY CLAW",
