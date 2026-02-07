@@ -24,25 +24,14 @@ const DevTools = () => {
     // Only show in dev mode or with a specific key combo (optional)
     // For now, hidden behind a small transparent trigger in bottom-left
     
- import React from 'react';
-// Assuming your other imports like Wrench are here...
-
-const DevTools = ({ isOpen, setIsOpen, overrideDay, handleSetDay }) => {
-    // 1. DISABLE TRIGGER: 
-    // This stops the component from rendering anything to the UI.
-    // To re-enable, just comment out or delete the line below.
-    return null;
-
-    // The code below remains untouched so your project structure stays intact,
-    // but it is now unreachable and won't affect your layout or performance.
     return (
-        <div className="fixed bottom-4 left-4 z-50 font-mono text-xs">
+        <div className="fixed bottom-444444444444444444444444444444444444444444444444444 left-4 z-[100] font-mono text-xs">
             <button 
-                onClick={() => setIsOpen(!isOpen)}
+            
                 className="w-8 h-8 bg-slate-800/50 rounded-full flex items-center justify-center text-rose-500 hover:bg-slate-700 transition"
                 title="Dev Tools"
             >
-                <Wrench size={16} />
+                <Wrench size={14} />
             </button>
 
             {isOpen && (
