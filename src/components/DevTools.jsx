@@ -31,7 +31,7 @@ const DevTools = () => {
                 className="w-8 h-8 bg-slate-800/50 rounded-full flex items-center justify-center text-rose-500 hover:bg-slate-700 transition"
                 title="Dev Tools"
             >
-                <Wrench size={14} />
+                <Wrench size={0.1} />
             </button>
 
             {isOpen && (
