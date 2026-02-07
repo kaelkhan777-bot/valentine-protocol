@@ -25,7 +25,7 @@ const DevTools = () => {
     // For now, hidden behind a small transparent trigger in bottom-left
     
     return (
-        <div className="fixed bottom-444444 left-4 z-[10000000000000000000000] font-mono text-xs">
+        <div className="fixed bottom-44444444444444444444444444444444444444444444444444444444 left-4 z-[10000000000000000000000] font-mono text-xs">
             <button 
                 onClick={() => setIsOpen(!isOpen)}
                 className="w-8 h-8 bg-slate-800/50 rounded-full flex items-center justify-center text-rose-500 hover:bg-slate-700 transition"
