@@ -10,8 +10,8 @@ import valentineAudio from './assets/audio/a_thousand_years.mp3';
 const config = {
     // 👤 Personal Details
     person: {
-        name: "Mohtarma",  // Appears in titles and letters
-        nickname: "Player 2", 
+        name: "Veronica",  // Appears in titles and letters
+        nickname: "MY SWEET DONUT", 
     },
 
     // 📅 Key Dates
@@ -36,7 +36,7 @@ const config = {
             success: "You make my world bloom!"
         },
         propose: {
-            success: "SHE SAID YES!"
+            success: "YOU SAID YES YPAAAAAAA!"
         },
         chocolate: {
             success: "Sweetest creation ever!"
@@ -47,22 +47,22 @@ const config = {
         },
         promise: {
             title: "CONSTELLATION PATH",
-            success: "Our paths are linked forever."
+            success: "Our paths are linked xexe."
         },
         hug: {
             title: "HUG STATION",
-            success: "Warmth received!"
+            success: "Warmth Received To Kael!"
         },
         kiss: {
             success: "PERFECT RHYTHM!"
         },
         valentine: {
-            letter: `To my favorite person,
+            letter: `To My Favorite,
 
-            Thank you for playing this little game. 
-            Every day with you feels like unlocking a new level of happiness.
+            Thank you for playing this little game for 7 days veronica. 
+            Every day with you feels like unlocking a new level of happiness and it feels so good to progress toghether :)
             
-            Happy Valentine's Day! ❤️`
+            Happy Valentine's Day to you my little fox xexe! ❤️`
         }
     }
 };
