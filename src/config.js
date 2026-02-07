@@ -10,7 +10,7 @@ import valentineAudio from './assets/audio/a_thousand_years.mp3';
 const config = {
     // 👤 Personal Details
     person: {
-        name: "Veronica",  // Appears in titles and letters
+        name: "Veronica fox",  // Appears in titles and letters
         nickname: "MY SWEET DONUT", 
     },
 
